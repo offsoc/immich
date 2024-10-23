@@ -168,7 +168,7 @@ export class LibraryService extends BaseService {
   }
 
   async unwatch(id: string) {
-    if (this.watchers[id]) {
+    if (this.watchers.hasOwnProperty(id) && typeof this.watchers[id] === 'function') {
       await this.watchers[id]();
       delete this.watchers[id];
     }
