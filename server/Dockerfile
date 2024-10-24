@@ -1,5 +1,5 @@
 # dev build
-FROM ghcr.io/immich-app/base-server-dev:20241008@sha256:d1af54cfda17b6b653de580afdc4bdc5cb06153b269e402035ad485a4fe0262e AS dev
+FROM ghcr.io/immich-app/base-server-dev:20241022@sha256:22941f8bd36e27a2a659e755ce8ee3e3906adfa41a3ad15e81cad0ed333c14ff AS dev
 
 RUN apt-get install --no-install-recommends -yqq tini
 WORKDIR /usr/src/app
@@ -25,7 +25,7 @@ COPY --from=dev /usr/src/app/node_modules/@img ./node_modules/@img
 COPY --from=dev /usr/src/app/node_modules/exiftool-vendored.pl ./node_modules/exiftool-vendored.pl
 
 # web build
-FROM node:20.17.0-alpine3.20@sha256:2d07db07a2df6830718ae2a47db6fedce6745f5bcd174c398f2acdda90a11c03 AS web
+FROM node:20.18.0-alpine3.20@sha256:c13b26e7e602ef2f1074aef304ce6e9b7dd284c419b35d89fcf3cc8e44a8def9 AS web
 
 WORKDIR /usr/src/open-api/typescript-sdk
 COPY open-api/typescript-sdk/package*.json open-api/typescript-sdk/tsconfig*.json ./
@@ -37,11 +37,12 @@ WORKDIR /usr/src/app
 COPY web/package*.json web/svelte.config.js ./
 RUN npm ci
 COPY web ./
+COPY i18n ../i18n
 RUN npm run build
 
 
 # prod build
-FROM ghcr.io/immich-app/base-server-prod:20241008@sha256:c0cf2a16987a53d9c2f00f127415da537b5812055a6855a62e4b0abd33c4d695
+FROM ghcr.io/immich-app/base-server-prod:20241022@sha256:6676a716a11106887c98a2d4ac4677a92c6f80ba6da3e496de1b302a56882ef5
 
 WORKDIR /usr/src/app
 ENV NODE_ENV=production \
