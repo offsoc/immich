@@ -6,16 +6,11 @@
 
   interface Props {
     children?: Snippet;
-    /**
-     * In "small" screen sizes, show mini version of the sidebar.
-     */
-    peek?: boolean;
   }
 
-  const smBreakpoint = 640;
   const mdBreakpoint = 768;
 
-  let { children, peek = false }: Props = $props();
+  let { children }: Props = $props();
 
   let innerWidth: number = $state(0);
 
@@ -27,7 +22,7 @@
     $isOpen = window.innerWidth >= mdBreakpoint ? true : false;
   };
 
-  let isHidden = $derived(!$isOpen && (innerWidth < smBreakpoint || (innerWidth < mdBreakpoint && !peek)));
+  let isHidden = $derived(!$isOpen && innerWidth < mdBreakpoint);
 
   const handleEscape = () => {
     closeSidebar();
@@ -38,20 +33,16 @@
 </script>
 
 <svelte:window onresize={closeSidebar} bind:innerWidth />
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
   id="sidebar"
   tabindex="-1"
-  class="immich-scrollbar group relative z-10 flex w-0 flex-col gap-1 overflow-y-auto overflow-x-hidden bg-immich-bg pt-8 transition-all duration-200 dark:bg-immich-dark-bg hover:sm:pr-6 md:w-64 md:pr-6 hover:md:shadow-none"
+  class="immich-scrollbar group relative z-10 flex w-0 flex-col gap-1 overflow-y-auto overflow-x-hidden bg-immich-bg pt-8 transition-all duration-200 dark:bg-immich-dark-bg md:w-64 pr-6"
   class:shadow-2xl={$isOpen && innerWidth < mdBreakpoint}
   class:dark:border-r-immich-dark-gray={$isOpen && innerWidth < mdBreakpoint}
   class:border-r={$isOpen && innerWidth < mdBreakpoint}
   class:pr-6={$isOpen}
   class:w-64={$isOpen}
-  class:sm:w-18={!$isOpen && peek}
   inert={isHidden}
-  onmouseenter={() => ($isOpen = true)}
-  onmouseleave={closeSidebar}
   onfocusin={() => ($isOpen = true)}
   use:shortcuts={[
     {

@@ -42,7 +42,7 @@
 {/if}
 
 <div
-  class="text-sm flex md:flex pl-5 pr-1 place-items-center place-content-center justify-between min-w-56 overflow-hidden"
+  class="text-sm flex md:flex pl-5 pr-1 place-items-center place-content-center justify-between min-w-48 overflow-hidden"
 >
   {#if $connected}
     <div class="flex gap-2 place-items-center place-content-center">
