@@ -87,7 +87,7 @@
         </div>
       </div>
 
-      <section class="flex place-items-center justify-end gap-1 md:gap-2 w-full sm:w-auto">
+      <section class="flex place-items-center justify-end gap-1 w-full sm:w-auto">
         {#if $featureFlags.search}
           <CircleIconButton
             href={AppRoute.SEARCH}
@@ -120,10 +120,11 @@
           <Button
             leadingIcon={mdiTrayArrowUp}
             onclick={onUploadClick}
-            class="hidden lg:flex"
+            class="hidden lg:flex px-2"
             variant="ghost"
             color="secondary"
-            >{$t('upload')}
+          >
+            {$t('upload')}
           </Button>
           <CircleIconButton
             onclick={onUploadClick}
