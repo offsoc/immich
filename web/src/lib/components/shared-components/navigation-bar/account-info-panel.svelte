@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from '$app/state';
   import { focusTrap } from '$lib/actions/focus-trap';
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import Icon from '$lib/components/elements/icon.svelte';
@@ -90,7 +89,7 @@
       {#if $user.isAdmin}
         <Button
           href={AppRoute.ADMIN_USER_MANAGEMENT}
-          leadingIcon={mdiCog}
+          leadingIcon={mdiWrench}
           variant="outline"
           color="secondary"
           size="small"
