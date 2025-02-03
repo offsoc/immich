@@ -518,6 +518,7 @@
   "custom_locale": "Custom Locale",
   "custom_locale_description": "Format dates and numbers based on the language and the region",
   "dark": "Dark",
+  "dark_theme": "Dark Theme",
   "date_after": "Date after",
   "date_and_time": "Date and Time",
   "date_before": "Date before",
