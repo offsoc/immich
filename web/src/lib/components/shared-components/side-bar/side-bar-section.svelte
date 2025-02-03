@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { focusTrap } from '$lib/actions/focus-trap';
   import { shortcuts } from '$lib/actions/shortcut';
   import { menuButtonId } from '$lib/components/shared-components/navigation-bar/navigation-bar.svelte';
   import { isOpen } from '$lib/stores/side-bar.store';
@@ -19,7 +20,7 @@
   });
 
   const closeSidebar = () => {
-    $isOpen = window.innerWidth >= mdBreakpoint ? true : false;
+    $isOpen = innerWidth >= mdBreakpoint ? true : false;
   };
 
   let isHidden = $derived(!$isOpen && innerWidth < mdBreakpoint);
@@ -44,6 +45,7 @@
   class:w-64={$isOpen}
   inert={isHidden}
   onfocusin={() => ($isOpen = true)}
+  use:focusTrap={{ active: $isOpen && innerWidth < mdBreakpoint }}
   use:shortcuts={[
     {
       shortcut: { key: 'Escape' },
