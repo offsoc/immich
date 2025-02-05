@@ -34,7 +34,7 @@
     </Button>
   {:else}
     <CircleIconButton
-      title={$t('toggle_theme')}
+      title={$t('dark_theme')}
       {icon}
       {viewBox}
       role="switch"
