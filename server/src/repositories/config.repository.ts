@@ -317,7 +317,7 @@ const getEnv = (): EnvData => {
         typeorm: {
           type: 'postgres',
           entities: [`${folders.dist}/entities` + '/*.entity.{js,ts}'],
-          migrations: [`${folders.dist}/migrations` + '/*.{js,ts}'],
+          migrations: [`${folders.dist}/migrations` + '/*.mjs'],
           subscribers: [`${folders.dist}/subscribers` + '/*.{js,ts}'],
           migrationsRun: false,
           synchronize: false,
