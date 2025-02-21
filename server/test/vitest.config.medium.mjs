@@ -7,12 +7,12 @@ export default defineConfig({
     root: './',
     globals: true,
     include: ['test/medium/**/*.spec.ts'],
-    globalSetup: ['test/medium/globalSetup.mts'],
+    globalSetup: ['test/medium/globalSetup.ts'],
     server: {
       deps: {
         fallbackCJS: true,
       },
     },
   },
-  plugins: [swc.vite({exclude: /.*\/migrations\/.*\.ts/}), tsconfigPaths()],
+  plugins: [swc.vite(), tsconfigPaths()],
 });
