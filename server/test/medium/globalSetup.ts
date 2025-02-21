@@ -31,14 +31,7 @@ const globalSetup = async () => {
     ])
     .withReuse()
     .start();
-  //    command: >-
-  //       postgres
-  //       -c shared_preload_libraries=vectors.so
-  //       -c 'search_path="$$user", public, vectors'
-  //       -c logging_collector=on
-  //       -c max_wal_size=2GB
-  //       -c shared_buffers=512MB
-  //       -c wal_compression=on
+
   const postgresPort = postgres.getMappedPort(5432);
   const postgresUrl = `postgres://postgres:postgres@localhost:${postgresPort}/immich`;
   process.env.IMMICH_TEST_POSTGRES_URL = postgresUrl;

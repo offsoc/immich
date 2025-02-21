@@ -90,6 +90,7 @@ import { Mocked, vitest } from 'vitest';
 type Overrides = {
   worker?: ImmichWorker;
   metadataRepository?: MetadataRepository;
+  userRepository?: UserRepository;
 };
 type BaseServiceArgs = ConstructorParameters<typeof BaseService>;
 type Constructor<Type, Args extends Array<any>> = {
@@ -144,7 +145,7 @@ export const newTestService = <T extends BaseService>(
   Service: Constructor<T, BaseServiceArgs>,
   overrides?: Overrides,
 ) => {
-  const { metadataRepository } = overrides || {};
+  const { metadataRepository, userRepository } = overrides || {};
 
   const accessMock = newAccessRepositoryMock();
   const loggerMock = newLoggingRepositoryMock();
@@ -185,7 +186,7 @@ export const newTestService = <T extends BaseService>(
   const tagMock = newTagRepositoryMock();
   const telemetryMock = newTelemetryRepositoryMock();
   const trashMock = newTrashRepositoryMock();
-  const userMock = newUserRepositoryMock();
+  const userMock = (userRepository || newUserRepositoryMock()) as Mocked<RepositoryInterface<UserRepository>>;
   const versionHistoryMock = newVersionHistoryRepositoryMock();
   const viewMock = newViewRepositoryMock();
 
